@@ -1,9 +1,9 @@
 class Board {
-  function initialize(cols, rows) {
+  function initialize(nrows, ncols) {
     var rows = [];
-    for (var i=0; i<rows.length; i++) {
+    for (var i=0; i<nrows; i++) {
       var row = [];
-      for (var j=0; j<cols.length; j++) {
+      for (var j=0; j<ncols; j++) {
         row.push(null);
       }
 
@@ -22,11 +22,13 @@ class Factory {
     this.board = new Board(10, 10);
     var piece = this.createPiece(0, 1);
     this.board.setPiece(piece);
+    piece.moveTo(3,4);
   }
 
   function createPiece(x, y) {
     return new Piece(x, y, JQPiece);
   }
+
 }
 class JQPiece {
   function moveTo(x, y) {
