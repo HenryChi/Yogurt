@@ -1,0 +1,99 @@
+class Board {
+  function initialize(cols, rows) {
+    var rows = [];
+    for (var i=0; i<rows.length; i++) {
+      var row = [];
+      for (var j=0; j<cols.length; j++) {
+        row.push(null);
+      }
+
+      rows.push(row);
+    }
+    this.rows = rows;
+  }
+
+  function setPiece(piece) {
+    this.rows[piece.y][piece.x] = piece;
+  }
+}
+
+class Factory {
+  function initialize() {
+    this.board = new Board(10, 10);
+    var piece = this.createPiece(0, 1);
+    this.board.setPiece(piece);
+  }
+
+  function createPiece(x, y) {
+    return new Piece(x, y, JQPiece);
+  }
+}
+class JQPiece {
+  function moveTo(x, y) {
+    console.log("I am at " + x + ', ' + y);
+  }
+}
+
+class Piece {
+  function initialize(x, y, klass) {
+    this.x = x;
+    this.y = y;
+    this.ui = new klass();
+  }
+
+  function setPosition(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  function moveTo(x, y) {
+    this.setPosition(x,y);
+    this.ui.moveTo(x, y);
+  }
+
+  function possiblePositions() {
+    return [];
+  }
+}
+
+class Soldier extends Piece {
+  function possiblePositions() {
+    var x = this.x;
+    var y = this.y;
+
+    return [ 
+      [ x + 1, y - 1 ],
+      [ x + 1, y + 1 ],
+      [ x + 1, y ],
+      [ x - 1, y - 1 ],
+      [ x - 1, y + 1 ],
+      [ x - 1, y ],
+      [ x + 1, y + 1 ],
+      [ x - 1, y - 1 ]
+    ];
+  }
+}
+
+class Horse extends Piece {
+
+}
+
+class Car extends Piece {
+
+}
+class Canon extends Piece {
+
+}
+class Elephant extends Piece {
+
+}
+
+class BodyGuard extends Piece {
+
+}
+
+class King extends Piece {
+
+}
+
+var f = new Factory();
